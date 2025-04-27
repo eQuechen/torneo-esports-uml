@@ -5,7 +5,6 @@
 >Emilio Brahim Quechen Romero
 >>https://github.com/eQuechen
 
-> https://github.com/eQuechen/torneo-esports-uml
 
 # Principios de modelado de casos de uso
 
@@ -203,201 +202,201 @@ De esta manera, ilustro, no solo la estructura básica, sino también conceptos 
 
 ## Diagrama de clases (código Mermaid)
 
-mermaid
+``` mermaid
 classDiagram
 direction TB
 
-    class Equipo {
-        - id : int
-        - nombre : String
-        - pais : String
-        - jugadores [*]
-    }
+class Equipo {
+    - id : int
+    - nombre : String
+    - pais : String
+    - jugadores [*]
+}
 
-    class Jugador {
-        - id : int
-        - nombre : String
-        - apellidos : String
-        - equipo : Equipo
-    }
+class Jugador {
+    - id : int
+    - nombre : String
+    - apellidos : String
+    - equipo : Equipo
+}
 
-    class GenericDao~T, ID, R~ {
-        <<interface>>
-        + findById(primaryKey : ID): Optional~T~
-        + insertOne(object : T): R
-        + updateOne(object : T): R
-        + deleteById(primaryKey : ID): R
-        + deleteByObject(object : T): R
-        + findAll(): List~T~
-    }
+class GenericDao~T, ID, R~ {
+    <<interface>>
+    + findById(primaryKey : ID): Optional~T~
+    + insertOne(object : T): R
+    + updateOne(object : T): R
+    + deleteById(primaryKey : ID): R
+    + deleteByObject(object : T): R
+    + findAll(): List~T~
+}
 
-    class EquipoDao
-    <<interface>> EquipoDao
+class EquipoDao
+<<interface>> EquipoDao
 
-    class JugadorDao
-    <<interface>> JugadorDao
+class JugadorDao
+<<interface>> JugadorDao
 
-    class GenericAbstractImpl {
-        <<abstract>>
-        # connection : Connection
-        # sql        : String
-        # rowCount   : int
-        + GenericAbstractImpl()
-    }
+class GenericAbstractImpl {
+    <<abstract>>
+    # connection : Connection
+    # sql        : String
+    # rowCount   : int
+    + GenericAbstractImpl()
+}
 
-    class EquipoDaoImpl {
-        <<final>>
-        - eDao : EquipoDao
-    }
+class EquipoDaoImpl {
+    <<final>>
+    - eDao : EquipoDao
+}
 
-    class JugadorDaoImpl {
-        <<final>>
-         - jDao : JugadorDao
-    }
+class JugadorDaoImpl {
+    <<final>>
+     - jDao : JugadorDao
+}
 
-    class EquipoSchema {
-        <<abstract>>
-        + TABLE_NAME : String #123;frozen#125;
-        + COL_ID : String #123;frozen#125;
-        + COL_NAME : String #123;frozen#125;
-        + COL_COUNTRY : String #123;frozen#125;
-        + COLUMNS_SQL_INSERT : String #123;frozen#125;
-        + COLUMNS_SQL_UPDATE : String #123;frozen#125;
-    }
+class EquipoSchema {
+    <<abstract>>
+    + TABLE_NAME : String #123;frozen#125;
+    + COL_ID : String #123;frozen#125;
+    + COL_NAME : String #123;frozen#125;
+    + COL_COUNTRY : String #123;frozen#125;
+    + COLUMNS_SQL_INSERT : String #123;frozen#125;
+    + COLUMNS_SQL_UPDATE : String #123;frozen#125;
+}
 
-    class JugadorSchema {
-        <<abstract>>
-        + TABLE_NAME : String #123;frozen#125;
-        + COL_ID : String #123;frozen#125;
-        + COL_NAME : String #123;frozen#125;
-        + COL_LAST_NAME : String #123;frozen#125;
-        + COL_TEAM_FK : String #123;frozen#125;
-        + COLUMNS_SQL_INSERT : String #123;frozen#125;
-        + COLUMNS_SQL_UPDATE : String #123;frozen#125;
-    }
+class JugadorSchema {
+    <<abstract>>
+    + TABLE_NAME : String #123;frozen#125;
+    + COL_ID : String #123;frozen#125;
+    + COL_NAME : String #123;frozen#125;
+    + COL_LAST_NAME : String #123;frozen#125;
+    + COL_TEAM_FK : String #123;frozen#125;
+    + COLUMNS_SQL_INSERT : String #123;frozen#125;
+    + COLUMNS_SQL_UPDATE : String #123;frozen#125;
+}
 
-    class GestorEquipos {
-        <<final>>
-        - jDao : JugadorDao
-        - eDao : EquipoDao
-        - GestorEquipos()
-        + getMenuEquipos(textMenu : String): void$
-        - registrarEquipo(): void$
-        - monstrarLista(): void$
-    }
+class GestorEquipos {
+    <<final>>
+    - jDao : JugadorDao
+    - eDao : EquipoDao
+    - GestorEquipos()
+    + getMenuEquipos(textMenu : String): void$
+    - registrarEquipo(): void$
+    - monstrarLista(): void$
+}
 
-    class GestorJugadores {
-        <<final>>
-        - jDao : JugadorDao
-        - eDao : EquipoDao
-        - GestorJugadores()
-        + getMenuJugadores(textMenu : String): void$
-        - altaJugador(): void$
-        - monstrarLista(): void$
-    }
+class GestorJugadores {
+    <<final>>
+    - jDao : JugadorDao
+    - eDao : EquipoDao
+    - GestorJugadores()
+    + getMenuJugadores(textMenu : String): void$
+    - altaJugador(): void$
+    - monstrarLista(): void$
+}
 
-    class ValidateInput {
-        ~ scan : Scanner$
-        - ValidateInput()
-        + validateString(textToShow : String) : String$
-        + validateInt(minInput : int, maxInput : int, textToShow : String) : int$
-        + validateContinue() : void$
-        + validateMinId(lista [*]) : int$
-        + validateMaxId(lista [*]) : int$
-        + validateClose() : void$
-    }
+class ValidateInput {
+    ~ scan : Scanner$
+    - ValidateInput()
+    + validateString(textToShow : String) : String$
+    + validateInt(minInput : int, maxInput : int, textToShow : String) : int$
+    + validateContinue() : void$
+    + validateMinId(lista [*]) : int$
+    + validateMaxId(lista [*]) : int$
+    + validateClose() : void$
+}
 
-    class MysqlConnector {
-        - instance : MysqlConnector $
-        - jdbcVersion : String
-        - connection : Connection
-        - DB_NAME : String      #123;frozen#125;
-        - DB_HOST : String      #123;frozen#125;
-        - DB_USER : String      #123;frozen#125;
-        - DB_PASSWORD : String  #123;frozen#125;
-        - DB_PORT : String      #123;frozen#125;
-        - DB_URL : String       #123;frozen#125;
-        - DB_DRIVER : String    #123;frozen#125;
-    }
+class MysqlConnector {
+    - instance : MysqlConnector $
+    - jdbcVersion : String
+    - connection : Connection
+    - DB_NAME : String      #123;frozen#125;
+    - DB_HOST : String      #123;frozen#125;
+    - DB_USER : String      #123;frozen#125;
+    - DB_PASSWORD : String  #123;frozen#125;
+    - DB_PORT : String      #123;frozen#125;
+    - DB_URL : String       #123;frozen#125;
+    - DB_DRIVER : String    #123;frozen#125;
+}
 
-    class VistaEquipos {
-        <<final>>
-        - TEXT_MENU : String #123;frozen#125;$
-        - VistaEquipos()
-        ~ lanzarVista()$
-    }
+class VistaEquipos {
+    <<final>>
+    - TEXT_MENU : String #123;frozen#125;$
+    - VistaEquipos()
+    ~ lanzarVista()$
+}
 
-    class VistaJugadores {
-        <<final>>
-        - TEXT_MENU : String #123;frozen#125;$
-        - VistaJugadores()
-        ~ lanzarVista()$
-    }
+class VistaJugadores {
+    <<final>>
+    - TEXT_MENU : String #123;frozen#125;$
+    - VistaJugadores()
+    ~ lanzarVista()$
+}
 
-    class VistaPrincipal {
-        <<final>>
-        - TEXT_MENU : String #123;frozen#125;$
-        - VistaPrincipal()
-        + lanzarVista()$
-    }
+class VistaPrincipal {
+    <<final>>
+    - TEXT_MENU : String #123;frozen#125;$
+    - VistaPrincipal()
+    + lanzarVista()$
+}
 
-    class Main {
-        + main(args : String[]) : void$
-    }
+class Main {
+    + main(args : String[]) : void$
+}
 
-    class List
-    <<interface>> List
+class List
+<<interface>> List
 
-    class ArrayList
+class ArrayList
 
 
 
-    Equipo "1" o-- "0..*" Jugador : jugadores
-    Equipo --() ArrayList
+Equipo "1" o-- "0..*" Jugador : jugadores
+Equipo --() ArrayList
 
-    ArrayList --|> List
+ArrayList --|> List
 
-    EquipoDao --|> GenericDao   : extends GenericDao<<?>Equipo,Integer,Integer>
-    JugadorDao --|> GenericDao  : extends GenericDao<<?>Jugador,Integer,Integer>
+EquipoDao --|> GenericDao   : extends GenericDao<<?>Equipo,Integer,Integer>
+JugadorDao --|> GenericDao  : extends GenericDao<<?>Jugador,Integer,Integer>
 
-    EquipoDaoImpl --|> GenericAbstractImpl  : extends
-    JugadorDaoImpl --|> GenericAbstractImpl : extends
+EquipoDaoImpl --|> GenericAbstractImpl  : extends
+JugadorDaoImpl --|> GenericAbstractImpl : extends
 
-    EquipoDaoImpl ..|> EquipoDao    : implements
-    JugadorDaoImpl ..|> JugadorDao  : implements
+EquipoDaoImpl ..|> EquipoDao    : implements
+JugadorDaoImpl ..|> JugadorDao  : implements
 
-    EquipoDaoImpl "1" --* "1" JugadorDao : jDao
-    JugadorDaoImpl "1" --* "1" EquipoDao : eDao
+EquipoDaoImpl "1" --* "1" JugadorDao : jDao
+JugadorDaoImpl "1" --* "1" EquipoDao : eDao
 
-    GenericAbstractImpl ..> MysqlConnector : uses
+GenericAbstractImpl ..> MysqlConnector : uses
 
-    EquipoDaoImpl ..> EquipoSchema      : uses
-    JugadorDaoImpl ..> JugadorSchema    : uses
+EquipoDaoImpl ..> EquipoSchema      : uses
+JugadorDaoImpl ..> JugadorSchema    : uses
 
-    GestorEquipos "1" *-- "1" JugadorDao    : jDao
-    GestorEquipos "1" *-- "1" EquipoDao     : eDao
-    GestorEquipos ..> ValidateInput : uses
-    GestorEquipos ..> Equipo        : uses
+GestorEquipos "1" *-- "1" JugadorDao    : jDao
+GestorEquipos "1" *-- "1" EquipoDao     : eDao
+GestorEquipos ..> ValidateInput : uses
+GestorEquipos ..> Equipo        : uses
 
-    GestorJugadores "1" *-- "1" JugadorDao  : jDao
-    GestorJugadores "1" *-- "1" EquipoDao   : eDao
-    GestorJugadores ..> ValidateInput   : uses
-    GestorJugadores ..> Jugador         : uses
+GestorJugadores "1" *-- "1" JugadorDao  : jDao
+GestorJugadores "1" *-- "1" EquipoDao   : eDao
+GestorJugadores ..> ValidateInput   : uses
+GestorJugadores ..> Jugador         : uses
 
-    VistaEquipos ..> GestorEquipos : uses
-    VistaJugadores ..> GestorJugadores  : uses
-    VistaPrincipal ..> ValidateInput    : uses
-    VistaPrincipal ..> VistaJugadores   : uses
-    VistaPrincipal ..> VistaEquipos     : uses
+VistaEquipos ..> GestorEquipos : uses
+VistaJugadores ..> GestorJugadores  : uses
+VistaPrincipal ..> ValidateInput    : uses
+VistaPrincipal ..> VistaJugadores   : uses
+VistaPrincipal ..> VistaEquipos     : uses
 
-    ValidateInput "1" *-- "1" Scanner   : scan
-    ValidateInput ..> Equipo    : uses
-    ValidateInput ..> Jugador   : uses
-    ValidateInput --() ArrayList
+ValidateInput "1" *-- "1" Scanner   : scan
+ValidateInput ..> Equipo    : uses
+ValidateInput ..> Jugador   : uses
+ValidateInput --() ArrayList
 
-    Main ..> VistaPrincipal : uses
-    
-    
+Main ..> VistaPrincipal : uses
+```
+
 ## Para establecer conexión con las BBDD correctamente a través del proyecto Java "bbdda-actividad3-grupal" se debe hacer lo siguiente:
 
 ### Configuración Java
