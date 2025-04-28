@@ -1,12 +1,17 @@
 # Sistema de Gestión de Torneos de eSports
 
 ## Autor
+Emilio Brahim Quechen Romero
 
->Emilio Brahim Quechen Romero
->>https://github.com/eQuechen
+https://github.com/eQuechen
 
+ Este proyecto implementa un sistema de gestión de torneos de eSports utilizando UML para el modelado y Java para la implementación.
 
-# Principios de modelado de casos de uso
+## Diagramas UML
+
+### Diagrama de Casos de Uso
+
+### Descripción y principios de modelado de casos de uso
 
 > Basándonos en las recomendaciones de **Alistair Cockburn** en su libro *Writing Effective Use Cases*, estructuramos nuestros casos de uso empezando por definir con precisión el ámbito y los actores de cada interacción, lo que nos permite, tal como él indica, mantener coherencia y claridad en todo el modelado de requisitos.
 
@@ -17,7 +22,7 @@
 
 ---
 
-## Caso de uso: Registrar equipo
+### Caso de uso: Registrar equipo
 
 | Campo                  |  Detalle                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                 |
 |------------------------|--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
@@ -32,7 +37,7 @@
 | **Extensiones**        | 1. **Nombre vacío**: “El nombre es obligatorio”.<br>2. **Nombre duplicado**: “Ese equipo ya existe”.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                     |
 
 
-## Caso de uso: Añadir jugador a un equipo
+### Caso de uso: Añadir jugador a un equipo
 
 | Campo                  | Detalle                                                                                                                                                                                                                                                                                |
 |------------------------|----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
@@ -47,7 +52,7 @@
 | **Extensiones**        | **Jugador ya en equipo**: “El jugador ya forma parte de este equipo”.                                                                                                                                                                                                                  |
 
 
-## Caso de uso: Consultar lista de equipos y jugadores
+### Caso de uso: Consultar lista de equipos y jugadores
 
 | Campo                  | Detalle                                                                                                                                                                                                                       |
 |------------------------|-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
@@ -64,18 +69,18 @@
 ---
 
 
-# Análisis del problema y requisitos del sistema
+### Análisis del problema y requisitos del sistema
 A continuación se responden las preguntas clave requeridas.
 
-### • ¿Quiénes son los actores que interactúan con el sistema?
+#### • ¿Quiénes son los actores que interactúan con el sistema?
 > - **Administrador**: Actor principal que realiza todas las operaciones relacionadas con equipos y jugadores.
 
-### • ¿Cuáles son las acciones el actor puede realizar?
+#### • ¿Cuáles son las acciones el actor puede realizar?
   > - Registrar un equipo.
   > - Añadir jugadores a un equipo existente.
   > - Consultar la lista de equipos y jugadores.
 
-### • ¿Cómo se relacionan entre sí las entidades del sistema?
+#### • ¿Cómo se relacionan entre sí las entidades del sistema?
 > - Un **Equipo** está compuesto por una lista de **Jugadores**.
 > - Los **Jugadores** pertenecen a un único **Equipo**.
 > - Estas entidades están involucradas en los flujos gestionados por el actor principal a través de los casos de uso.
@@ -83,7 +88,7 @@ A continuación se responden las preguntas clave requeridas.
 ---
 
 
-# Modelado de diagramas.
+### Modelado de diagramas.
 Durante el modelado de los diagramas seguiremos una serie de pautas y reglas establecidas.<br>
 Nos basaremos en libros de expertos en UML:
 - [**Writing Effective Use Cases** - *Alaistair Cockburn*]
@@ -92,7 +97,6 @@ Nos basaremos en libros de expertos en UML:
 Y en el proceso de ingeniería del software:
 - [**Ingeniería del software un enfoque práctico** - *Roger S. Pressman*].
 
-## Conceptos tenidos en cuenta durante el modelado.
 
 ### Consideraciones generales:
 
@@ -143,11 +147,13 @@ Y en el proceso de ingeniería del software:
 
 ---
 
-# Modelado del diagrama de clases
+### Diagrama de Clases
+
+### Modelado del diagrama de clases
 
 > A continuación se muestra el diagrama de clases del sistema Gestión de Equipos y Jugadores, siguiendo las pautas de **Martin Fowler** en *UML Distilled* para maximizar claridad y coherencia en el diseño.
 
-## Principales componentes
+### Principales componentes
 
 - **Entidades del dominio**  
   - `Equipo` y `Jugador` con relación de **composición**: un `Equipo` contiene múltiples `Jugador` (1..*) y cada `Jugador` pertenece a un único `Equipo`.  
@@ -165,7 +171,7 @@ Y en el proceso de ingeniería del software:
   - `VistaPrincipal`, `VistaEquipos` y `VistaJugadores` muestran al administrador menús estáticos (`{static final}`) y llaman a los controladores.  
   - `Main` arranca la aplicación invocando `VistaPrincipal`.  
 
-## Pautas seguidas
+### Pautas seguidas
 
 - **Composición y dependencia**  
   - Se emplea **composición** (`*--`) para relaciones de propiedad y ciclo de vida compartido.  
@@ -179,7 +185,7 @@ Y en el proceso de ingeniería del software:
 
 Con este diagrama garantizamos una visión global de la arquitectura en **capas**, las **responsabilidades** de cada clase y la **estructura de dependencias**, facilitando futuras modificaciones y ampliaciones.
 
-## Detalles y notaciones avanzadas
+### Detalles y notaciones
 
 - **Realización de interfaces**  
   > Los DAOs (`EquipoDao`, `JugadorDao`) se marcan con `«interface»` y las implementaciones (`EquipoDaoImpl`, `JugadorDaoImpl`) usan la flecha punteada de realización (`..|>`) en lugar de la “roseta” (lollipop). Esto refuerza que el contrato se cumple en tiempo de compilación, no en tiempo de ejecución.
@@ -200,7 +206,7 @@ Con este diagrama garantizamos una visión global de la arquitectura en **capas*
 
 De esta manera, ilustro, no solo la estructura básica, sino también conceptos UML más avanzados (realización, genéricos, composición vs. agregación, inmutabilidad y patrones de diseño), haciendo el diagrama rico y preciso sin sacrificar legibilidad, siempre siguiendo las pautas de los libros mencionados.
 
-## Diagrama de clases (código Mermaid)
+### Diagrama de clases (código Mermaid)
 
 ``` mermaid
 classDiagram
@@ -251,7 +257,6 @@ class EquipoDaoImpl {
 
 class JugadorDaoImpl {
     <<final>>
-     - jDao : JugadorDao
 }
 
 class EquipoSchema {
@@ -397,27 +402,96 @@ ValidateInput --() ArrayList
 Main ..> VistaPrincipal : uses
 ```
 
-## Para establecer conexión con las BBDD correctamente a través del proyecto Java "bbdda-actividad3-grupal" se debe hacer lo siguiente:
+## Estructura de directorios
 
-### Configuración Java
-	1A. Crear las variables de entorno:
-		MYSQL_DB_NAME=esports_mysql;
-		MYSQL_DB_HOST=localhost;
-		MYSQL_USER=root;
-		MYSQL_PASSWORD=mysql;
-		MYSQL_DB_PORT=3306;
+```text
+torneo-esports-uml/
+├── src/
+│   ├── diagrams/
+│   │   └── codigo/
+│   │       ├── anadir_jugador.png
+│   │       ├── clases.png
+│   │       ├── consultar_lista.png
+│   │       └── registrar_equipo.png
+│   └── main/
+│       ├── java/
+│       │   └── es/empresa/torneo/
+│       │       ├── control/
+│       │       │   ├── GestorEquipos.java
+│       │       │   └── GestorJugadores.java
+│       │       ├── modelo/
+│       │       │   ├── Equipo.java
+│       │       │   └── Jugador.java
+│       │       ├── persistencia/
+│       │       │   ├── config/
+│       │       │   │   └── MysqlConnector.java
+│       │       │   ├── constants/
+│       │       │   │   ├── EquipoSchema.java
+│       │       │   │   └── JugadorSchema.java
+│       │       │   ├── dao/
+│       │       │   │   ├── GenericDao.java
+│       │       │   │   ├── EquipoDao.java
+│       │       │   │   └── JugadorDao.java
+│       │       │   ├── impl/
+│       │       │   │   ├── GenericAbstractImpl.java
+│       │       │   │   ├── EquipoDaoImpl.java
+│       │       │   │   └── JugadorDaoImpl.java
+│       │       │   └── util/
+│       │       │       └── ValidateInput.java
+│       │       ├── vista/
+│       │       │   ├── VistaEquipos.java
+│       │       │   ├── VistaJugadores.java
+│       │       │   └── VistaPrincipal.java
+│       │       └── Main.java
+│       └── resources/
+│           └── ddl_esports_mysql.sql
+├── .gitignore
+├── pom.xml
+└── README.md
+```
+
+## Instalación y Ejecución
+
+1. Clonar el repositorio:
+
+`git clone https://github.com/eQuechen/torneo-esports-uml.git`
+
+2. Compilar y ejecutar el proyecto:
+
+`cd src javac src/main/java/es/empresa/torneo/Main.java java src.main.java.es.empresa.torneo.Main`
+
+3. Para establecer conexión con las BBDD correctamente a través del proyecto Java "torneo-esports-uml" se debe hacer lo siguiente:
+
+#### Configuración Java
+
+3A. Crear las variables de entorno:
+```text
+MYSQL_DB_NAME=esports_mysql;
+MYSQL_DB_HOST=localhost;
+MYSQL_USER=root;
+MYSQL_PASSWORD=mysql;
+MYSQL_DB_PORT=3306;
+```
 		
-	1B. Copiar y pegar en run/debug configurations si se usa Inteliij:
-		MYSQL_DB_HOST=localhost;MYSQL_DB_NAME=esports_mysql;MYSQL_DB_PASSWORD=mysql;MYSQL_DB_PORT=3306;MYSQL_DB_USER=root
+3B. Copiar y pegar en run/debug configurations si se usa Inteliij:
+> MYSQL_DB_HOST=localhost;MYSQL_DB_NAME=esports_mysql;MYSQL_DB_PASSWORD=mysql;MYSQL_DB_PORT=3306;MYSQL_DB_USER=root
 
+#### Configuración MySQL
 
+- Instalar y ejecutar un contenedor de Docker con una imagen de MySQL:
+> docker run --name mysql-container -e MYSQL_ROOT_PASSWORD=mysql -d -p 3306:3306 mysql:latest
 
-### Configuración MySQL
-	2. Instalar y ejecutar un contenedor de Docker con una imagen de MySQL:
-		docker run --name mysql-container -e MYSQL_ROOT_PASSWORD=mysql -d -p 3306:3306 mysql:latest
+- Crear la conexión con MySQL en tu IDE:.
+```text
+En el caso de DataGrip, seleccionar:
 
-	3. Crear la conexión con MySQL en DataGrip y crear la BBDD con el nombre:
-		"esports_mysql"
+1. DataBase explorer.
+2. New
+3. Data-Source
+4. MySQL
+5. Introducir los datos del paso 3.A si seguiste la instalación del
+contenedor Docker, en caso contrario los que hayas establecido en tu BBDD.
+```
 	
-	4. Ejecutar en DataGrip el script SQL (DDL) que se encuentra en la ruta del proyecto "src/main/resources":
-		"ddl_esports_mysql.sql"
+- Ejecutar en tu IDE el script .sql (DDL) que se encuentra en la ruta del proyecto:
+>  src/main/resources/ddl_esports_mysql.sql

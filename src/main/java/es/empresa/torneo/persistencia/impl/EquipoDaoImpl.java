@@ -119,6 +119,7 @@ public final class EquipoDaoImpl extends GenericAbstractImpl implements EquipoDa
                 object.setId(rs.getInt(COL_ID));
                 object.setNombre(rs.getString(COL_NAME));
                 object.setPais(rs.getString(COL_COUNTRY));
+                object.setJugadores(jDao.findByTeam(object.getId()));
 
                 list.add(object);
             }

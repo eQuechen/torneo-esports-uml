@@ -14,5 +14,5 @@ public class Jugador {
     private int id;
     private String nombre;
     private String apellidos;
-    private Equipo equipo;
+    private int idEquipo;
 }

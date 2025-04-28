@@ -30,33 +30,17 @@ INSERT INTO `equipos` (nombre_equipo, pais_equipo) VALUES
 USE `esports_mysql`;
 
 INSERT INTO `jugadores` (nombre_jugador, apellidos_jugador, id_equipo) VALUES
-
   ('Juan',   'Pérez',      1),
   ('María',  'García',     1),
-  ('Luis',   'Hernández',  1),
-  ('Ana',    'López',      1),
-  ('Pedro',  'Martín',     1),
 
   ('Carlos', 'Martínez',   2),
   ('Lucía',  'Gómez',      2),
-  ('Marco',  'Díaz',       2),
-  ('Isabel', 'Sánchez',    2),
-  ('Jorge',  'Romero',     2),
 
   ('Pedro',  'Torres',     3),
   ('Marta',  'Ruiz',       3),
-  ('José',   'Ramírez',    3),
-  ('Carmen', 'Flores',     3),
-  ('Pablo',  'Castro',     3),
 
   ('Elena',  'Morales',    4),
   ('Diego',  'Ortiz',      4),
-  ('Teresa', 'Navarro',    4),
-  ('Alberto','Rojas',      4),
-  ('Paula',  'Bravo',      4),
 
-  ('Sergio', 'Molina',     5),
-  ('Laura',  'Herrera',    5),
-  ('Andrés', 'Vega',       5),
   ('Sandra', 'Silva',      5),
   ('Miguel', 'Campos',     5);

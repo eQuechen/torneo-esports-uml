@@ -2,7 +2,6 @@ package es.empresa.torneo.persistencia.impl;
 
 import es.empresa.torneo.modelo.Equipo;
 import es.empresa.torneo.modelo.Jugador;
-import es.empresa.torneo.persistencia.dao.EquipoDao;
 import es.empresa.torneo.persistencia.dao.JugadorDao;
 
 import java.sql.PreparedStatement;
@@ -15,12 +14,6 @@ import java.util.Optional;
 import static es.empresa.torneo.persistencia.constants.JugadorSchema.*;
 
 public final class JugadorDaoImpl extends GenericAbstractImpl implements JugadorDao {
-
-    private EquipoDao eDao;
-
-    public JugadorDaoImpl() {
-        eDao = new EquipoDaoImpl();
-    }
 
     @Override
     public Optional<Jugador> findById(Integer primaryKey) {
@@ -53,7 +46,7 @@ public final class JugadorDaoImpl extends GenericAbstractImpl implements Jugador
         try(PreparedStatement ps = connection.prepareStatement(sql)) {
             ps.setString(1, object.getNombre());
             ps.setString(2, object.getApellidos());
-            ps.setInt(3, object.getEquipo().getId());
+            ps.setInt(3, object.getIdEquipo());
 
             rowCount = ps.executeUpdate();
 
@@ -71,7 +64,7 @@ public final class JugadorDaoImpl extends GenericAbstractImpl implements Jugador
         try(PreparedStatement ps = connection.prepareStatement(sql)) {
             ps.setString(1, object.getNombre());
             ps.setString(2, object.getApellidos());
-            ps.setInt(3, object.getEquipo().getId());
+            ps.setInt(3, object.getIdEquipo());
 
             ps.setInt(4, object.getId());
 
@@ -111,21 +104,48 @@ public final class JugadorDaoImpl extends GenericAbstractImpl implements Jugador
     public List<Jugador> findAll() {
         sql = "SELECT * FROM %s".formatted(TABLE_NAME);
         List<Jugador> list = new ArrayList<>();
-        Equipo equipo = null;
 
         try (PreparedStatement ps = connection.prepareStatement(sql);
             ResultSet rs = ps.executeQuery()) {
 
             while (rs.next()) {
                 Jugador object = new Jugador();
-                if (equipo == null) equipo = new Equipo();
 
                 object.setId(rs.getInt(COL_ID));
                 object.setNombre(rs.getString(COL_NAME));
                 object.setApellidos(rs.getString(COL_LAST_NAME));
-                object.setEquipo(equipo);
+                object.setIdEquipo(rs.getInt(COL_TEAM_FK));
 
                 list.add(object);
+            }
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+        return list;
+    }
+
+    @Override
+    public List<Jugador> findByTeam(int primaryKey) {
+        sql = "SELECT * FROM %s WHERE %s = ?".formatted(TABLE_NAME, COL_TEAM_FK);
+        List<Jugador> list = new ArrayList<>();
+
+        try(PreparedStatement ps = connection.prepareStatement(sql)) {
+            ps.setInt(1, primaryKey);
+
+            try(ResultSet rs = ps.executeQuery()) {
+
+                while (rs.next() && rs.getInt(COL_TEAM_FK) == primaryKey) {
+                    Jugador object = new Jugador();
+
+                    object.setId(rs.getInt(COL_ID));
+                    object.setNombre(rs.getString(COL_NAME));
+                    object.setApellidos(rs.getString(COL_LAST_NAME));
+                    object.setIdEquipo(primaryKey);
+
+                    list.add(object);
+                }
             }
 
         } catch (SQLException e) {

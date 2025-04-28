@@ -27,14 +27,14 @@ public final class GestorJugadores {
             userInput = validateInt(1, 4, textMenu);
 
             switch (userInput) {
-                case 1 -> altaJugador();
+                case 1 -> altaJugadorEnEquipo();
                 case 2 -> monstrarLista();
                 case 4 -> validateClose();
             }
         }
     }
 
-    private static void altaJugador() {
+    private static void altaJugadorEnEquipo() {
         List<Jugador> jugadores = jDao.findAll();
         List<Equipo> equipos = eDao.findAll();
 
@@ -62,7 +62,10 @@ public final class GestorJugadores {
             jugadores.forEach(System.out::println);
 
             int idJugador = validateInt(minIdJugadores, maxIdJugadores, "Introduce el ID del jugador");
-            jugador = jugadores.get(idJugador);
+
+            jugador = jugadores.stream()
+                                .filter(j -> j.getId() == idJugador)
+                                .findFirst().get();
 
             System.out.printf("""
                     %n---------------------------------------
@@ -71,9 +74,11 @@ public final class GestorJugadores {
             equipos.forEach(System.out::println);
 
             int idEquipo = validateInt(minIdEquipos, maxIdEquipos, "Introduce el ID del equipo");
-            equipo = equipos.get(idEquipo);
+            equipo = equipos.stream()
+                                .filter(e -> e.getId() == idEquipo)
+                                .findFirst().get();
 
-            if (equipo.getId() == jugador.getId()) {
+            if (equipo.getId() == jugador.getIdEquipo()) {
                 System.out.printf("""
                                 El jugador %s %s ya está inscrito al equipo %s, prueba otro equipo.
                                 """,
@@ -82,7 +87,7 @@ public final class GestorJugadores {
                         equipo.getNombre());
 
             } else {
-                jugador.setEquipo(equipo);
+                jugador.setIdEquipo(idEquipo);
                 jDao.updateOne(jugador);
             }
 
@@ -99,7 +104,7 @@ public final class GestorJugadores {
         System.out.println("EQUIPOS:");
         eDao.findAll().forEach(System.out::println);
 
-        System.out.println("JUGADORES:");
+        System.out.println("\nJUGADORES:");
         jDao.findAll().forEach(System.out::println);
 
         validateContinue();
