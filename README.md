@@ -474,12 +474,15 @@ MYSQL_DB_PORT=3306;
 ```
 		
 3B. Copiar y pegar en run/debug configurations si se usa Inteliij:
-> MYSQL_DB_HOST=localhost;MYSQL_DB_NAME=esports_mysql;MYSQL_DB_PASSWORD=mysql;MYSQL_DB_PORT=3306;MYSQL_DB_USER=root
-
+```text
+MYSQL_DB_HOST=localhost;MYSQL_DB_NAME=esports_mysql;MYSQL_DB_PASSWORD=mysql;MYSQL_DB_PORT=3306;MYSQL_DB_USER=root
+```
 #### Configuración MySQL
 
 - Instalar y ejecutar un contenedor de Docker con una imagen de MySQL:
-> docker run --name mysql-container -e MYSQL_ROOT_PASSWORD=mysql -d -p 3306:3306 mysql:latest
+```text
+docker run --name mysql-container -e MYSQL_ROOT_PASSWORD=mysql -d -p 3306:3306 mysql:latest
+```
 
 - Crear la conexión con MySQL en tu IDE:.
 ```text
