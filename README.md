@@ -151,10 +151,13 @@ Y en el proceso de ingeniería del software:
 ---
 <br><br>
 ### Diagrama de Clases
+<br>
 
 ### Modelado del diagrama de clases
 
 > A continuación se muestra el diagrama de clases del sistema Gestión de Equipos y Jugadores, siguiendo las pautas de **Martin Fowler** en *UML Distilled* para maximizar claridad y coherencia en el diseño.
+
+<br>
 
 ### Principales componentes
 
@@ -173,6 +176,7 @@ Y en el proceso de ingeniería del software:
 - **Capa de presentación (vistas)**  
   - `VistaPrincipal`, `VistaEquipos` y `VistaJugadores` muestran al administrador menús estáticos (`{static final}`) y llaman a los controladores.  
   - `Main` arranca la aplicación invocando `VistaPrincipal`.  
+<br>
 
 ### Pautas seguidas
 
@@ -187,6 +191,8 @@ Y en el proceso de ingeniería del software:
   - Constantes se señalan como `{frozen}` y atributos estáticos por convención de subrayado o llaves.  
 
 Con este diagrama garantizamos una visión global de la arquitectura en **capas**, las **responsabilidades** de cada clase y la **estructura de dependencias**, facilitando futuras modificaciones y ampliaciones.
+
+<br>
 
 ### Detalles y notaciones
 
@@ -208,6 +214,8 @@ Con este diagrama garantizamos una visión global de la arquitectura en **capas*
   > - `ValidateInput` incluye una composición (`"1" *-- "1" Scanner : scan`) para compartir un único `Scanner` entre todos sus métodos estáticos.
 
 De esta manera, ilustro, no solo la estructura básica, sino también conceptos UML más avanzados (realización, genéricos, composición vs. agregación, inmutabilidad y patrones de diseño), haciendo el diagrama rico y preciso sin sacrificar legibilidad, siempre siguiendo las pautas de los libros mencionados.
+
+<br>
 
 ### Diagrama de clases (código Mermaid)
 
@@ -404,6 +412,7 @@ ValidateInput --() ArrayList
 
 Main ..> VistaPrincipal : uses
 ```
+<br>
 
 ## Estructura de directorios
 
