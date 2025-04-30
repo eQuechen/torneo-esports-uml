@@ -13,7 +13,7 @@ https://github.com/eQuechen
 
 ### Descripción y principios de modelado de casos de uso
 
-> Basándonos en las recomendaciones de **Alistair Cockburn** en su libro *Writing Effective Use Cases*, estructuramos nuestros casos de uso empezando por definir con precisión el ámbito y los actores de cada interacción, lo que nos permite, tal como él indica, mantener coherencia y claridad en todo el modelado de requisitos.
+Basándonos en las recomendaciones de **Alistair Cockburn** en su libro *Writing Effective Use Cases*, estructuramos nuestros casos de uso empezando por definir con precisión el ámbito y los actores de cada interacción, lo que nos permite, tal como él indica, mantener coherencia y claridad en todo el modelado de requisitos.
 
 ### Lo esencial según Cockburn
 - **Definir ámbito, actores y objetivos** (user goals).  
@@ -35,7 +35,7 @@ https://github.com/eQuechen
 | **Garantía de éxito**  | Equipo registrado correctamente y visible de inmediato en el catálogo.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                   |
 | **Escenario principal**| 1. El Administrador selecciona “Registrar equipo”.<br>2. El Administrador introduce los datos del equipo.<br>3. El Administrador confirma la creación.<br>4. El sistema valida y persiste el registro.                                                                                                                                                                                                                                                                                                                                                                                                                   |
 | **Extensiones**        | 1. **Nombre vacío**: “El nombre es obligatorio”.<br>2. **Nombre duplicado**: “Ese equipo ya existe”.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                     |
-
+---
 
 ### Caso de uso: Añadir jugador a un equipo
 
@@ -50,7 +50,7 @@ https://github.com/eQuechen
 | **Garantía de éxito**  | Jugador registrado correctamente.                                                                                                                                                                                                                                                      |
 | **Escenario principal**| 1. El Administrador selecciona “Añadir jugador a un equipo”.<br>2. Selecciona el equipo destino.<br>3. Selecciona el jugador.<br>4. Confirma la operación.<br>5. El sistema valida y persiste el registro.                                                                              |
 | **Extensiones**        | **Jugador ya en equipo**: “El jugador ya forma parte de este equipo”.                                                                                                                                                                                                                  |
-
+---
 
 ### Caso de uso: Consultar lista de equipos y jugadores
 
@@ -71,19 +71,23 @@ https://github.com/eQuechen
 
 ### Análisis del problema y requisitos del sistema
 A continuación se responden las preguntas clave requeridas.
+<br><br>
+
 
 #### • ¿Quiénes son los actores que interactúan con el sistema?
-> - **Administrador**: Actor principal que realiza todas las operaciones relacionadas con equipos y jugadores.
+ - **Administrador**: Actor principal que realiza todas las operaciones relacionadas con equipos y jugadores.
+<br><br>
 
 #### • ¿Cuáles son las acciones el actor puede realizar?
-  > - Registrar un equipo.
-  > - Añadir jugadores a un equipo existente.
-  > - Consultar la lista de equipos y jugadores.
+- Registrar un equipo.
+- Añadir jugadores a un equipo existente.
+- Consultar la lista de equipos y jugadores.
+<br><br>
 
 #### • ¿Cómo se relacionan entre sí las entidades del sistema?
-> - Un **Equipo** está compuesto por una lista de **Jugadores**.
-> - Los **Jugadores** pertenecen a un único **Equipo**.
-> - Estas entidades están involucradas en los flujos gestionados por el actor principal a través de los casos de uso.
+- Un **Equipo** está compuesto por una lista de **Jugadores**.
+- Los **Jugadores** pertenecen a un único **Equipo**.
+- Estas entidades están involucradas en los flujos gestionados por el actor principal a través de los casos de uso.
 
 ---
 
@@ -97,42 +101,42 @@ Nos basaremos en libros de expertos en UML:
 Y en el proceso de ingeniería del software:
 - [**Ingeniería del software un enfoque práctico** - *Roger S. Pressman*].
 
-
+<br><br>
 ### Consideraciones generales:
 
 > “Los casos de uso se definen desde el punto de vista de un actor. Un actor es un papel que desempeñan las personas (usuarios) o los dispositivos cuando interactúan con el software.”
 > <br>“Con una definición más formal, un actor es cualquier cosa que se comunique con el sistema o producto y que sea externo a éste. Todo actor tiene uno o más objetivos cuando utiliza el sistema.”
-> > — Roger S. Pressman, *Ingeniería del software, un enfoque práctico*, Capítulo 5: Comprensión de los requerimientos, pag 113
-
+> - Roger S. Pressman, *Ingeniería del software, un enfoque práctico*, Capítulo 5: Comprensión de los requerimientos, pag 113
+---
 > “Como primera regla general, usa siempre la relación **includes** entre casos de uso. Las personas que siguen esta regla afirman que ellos y sus lectores tienen menos confusión en su escritura que quienes mezclan **includes**, **extends** y **specializes**.”  
-> > — Alistair Cockburn, *Writing Effective Use Cases*, Appendix A, pag 207
-
-> - “Si el desencadenante implica cosas de las que el caso de uso **base** es responsable —es decir, el caso de uso base sabe cuándo/dónde/por qué debe ejecutarse el segundo caso de uso—, entonces el caso de uso base **incluye** al otro.  
-> - "Si el desencadenante implica cosas de las que el **segundo** caso de uso es responsable —es decir, el segundo caso de uso sabe cuándo/dónde/por qué debe ejecutarse—, entonces el segundo caso de uso extiende al caso de uso base.”  
-> > — Alistair Cockburn, *Writing Effective Use Cases*, pag 117
-
+> - Alistair Cockburn, *Writing Effective Use Cases*, Appendix A, pag 207
+---
+> 1. “Si el desencadenante implica cosas de las que el caso de uso **base** es responsable —es decir, el caso de uso base sabe cuándo/dónde/por qué debe ejecutarse el segundo caso de uso—, entonces el caso de uso base **incluye** al otro.  
+> 2. "Si el desencadenante implica cosas de las que el **segundo** caso de uso es responsable —es decir, el segundo caso de uso sabe cuándo/dónde/por qué debe ejecutarse—, entonces el segundo caso de uso extiende al caso de uso base.”  
+> - Alistair Cockburn, *Writing Effective Use Cases*, pag 117
+---
 > “No intentes descomponer casos de uso en subcasos de uso y sub-subcasos de uso utilizando una descomposición funcional. Ese tipo de descomposición es una buena forma de perder mucho tiempo.”  
-> > — Martin Fowler, *UML Distilled*, Chapter 9 – Use Cases, pag 101
-
+> - Martin Fowler, *UML Distilled*, Chapter 9 – Use Cases, pag 101
+---
 > “Para evitar duplicación en casos de uso, por lo general es mejor crear un nuevo caso de uso que represente la actividad duplicada y luego dejar que los otros casos de uso incluyan este nuevo caso de uso como uno de sus pasos.”  
-> > — Roger S. Pressman, *Ingeniería del software, un enfoque práctico*, Apéndice 1, pag 730
+> - Roger S. Pressman, *Ingeniería del software, un enfoque práctico*, Apéndice 1, pag 730
 
 ---
-
+<br><br>
 ### Uso de `<<include>>`:
 
 > “Un paso complicado en un caso de uso puede ser otro caso de uso. En términos de UML, decimos que el primer caso de uso incluye al segundo.”  
 > “Los casos de uso incluidos pueden ser útiles para un paso complejo que recargaría el escenario principal o para pasos que se repiten en varios casos de uso.”  
-> > — Martin Fowler, *UML Distilled*, Chapter 9 – Use Cases, pag 101
-
+> - Martin Fowler, *UML Distilled*, Chapter 9 – Use Cases, pag 101
+---
 > “Un caso de uso base incluye a un caso de uso incluido si un paso de acción en el caso de uso base menciona el nombre del caso de uso incluido. Esta es la relación normal y obvia entre un caso de uso de nivel superior y uno de nivel inferior.”  
-> > — Alistair Cockburn, *Writing Effective Use Cases*, Appendix A, pag 234
+> - Alistair Cockburn, *Writing Effective Use Cases*, Appendix A, pag 234
 
  Tanto *Cockburn* como *Martin Fowler* coinciden en que para modelar un caso de uso incluido, debe darse **al menos** una de las siguientes condiciones:
 - El caso de uso **siempre** utiliza el caso de uso incluido en cuestión, y además, este, **puede ser reutilizado**.
 - Estamos antes un paso complejo que sobrecargaría el escenario principal
 
----
+<br><br>
 
 ### Uso de `<<extends>>`:
 
@@ -144,9 +148,8 @@ Y en el proceso de ingeniería del software:
 
 > “Recuerda que el propósito original de **extends** es evitar tener que modificar el caso de uso base.”  
 > > — Alistair Cockburn, *Writing Effective Use Cases*, Appendix A, pag 238
-
 ---
-
+<br><br>
 ### Diagrama de Clases
 
 ### Modelado del diagrama de clases
